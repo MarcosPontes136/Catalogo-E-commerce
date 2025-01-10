@@ -1,7 +1,7 @@
 <div class="parent">
-  @for (product of products$ | async; track product) {
+  @for (product of displayedProducts; track product) {
     <mat-card class="example-card" appearance="outlined">
-        @if (product.status === 'sale') {
+        @if (product.status === 'sale' && product.discounted === 'discounted') {
           <div class="product-badge">
             <span>Sale</span>
           </div>
@@ -15,16 +15,19 @@
             </div>
             <div class="mat-text-primary text-xl">
               @if (product.discounted === 'discounted') {
-                <span class="strikethrough mat-text-muted text-sm">$ {{ product.discount }}</span>
+                <span class="strikethrough mat-text-muted text-sm ">$ {{ product.discount }}</span>
+                <span class="discounted-price"> $ {{ product.price }}</span>
               }
-              <span> $ {{ product.price }}</span>
+              @if (product.discounted !== 'discounted') {
+                <span > $ {{ product.price }}</span>
+              }
             </div>
             <button mat-icon-button color="accent" (click)="addProductToCart(product)">
               <mat-icon>add_shopping_cart</mat-icon>
             </button>
           </div>
         </mat-card-content>
-    </mat-card>
-  }
+      </mat-card>
+    }
 </div>
-
+<app-paginator [length]="totalProduct" (pageChange)="onPageChange($event)"></app-paginator>

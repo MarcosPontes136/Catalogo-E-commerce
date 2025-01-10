@@ -14,12 +14,15 @@ export class ProductsService {
   private readonly isLocal = true;
   private http = inject(HttpClient);
 
+  totalProduct = 0;
+
 
   load(): Observable<Product[]> {
     if (this.isLocal) {
       for (let num = 1; num <= 10; num++) {
           this.addProducts(num);
       }
+      this.totalProduct = this.products.length;
       return of(this.products);
     }
     return this.http.get<Product[]>(this.API);
@@ -37,7 +40,7 @@ export class ProductsService {
     this.products.push({
       id: `${i}`,
       price: parseFloat((Math.random() * (0.0 - 10.0) + 10.0).toFixed(2)),
-      status: ['', '', '', 'sale'][Math.floor(Math.random() * 4)],
+      status: 'sale',
       discounted: ['', '', '', 'discounted'][Math.floor(Math.random() * 4)],
       discount: parseFloat((Math.random() * (0.0 - 10.0) + 10.0).toFixed(2)),
       name: ['Coffee'][Math.floor(Math.random() * 1)],
@@ -45,5 +48,4 @@ export class ProductsService {
       image: `${i}`
     });
   }
-
 }
