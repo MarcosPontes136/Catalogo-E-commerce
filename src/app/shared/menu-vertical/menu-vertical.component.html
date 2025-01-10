@@ -1,0 +1,26 @@
+<mat-menu #menu="matMenu">
+
+  <!-- Caso não esteja logado, encaminhar para pagina de login -->
+  <button mat-menu-item [routerLink]="['/']">
+    <mat-icon>person</mat-icon>
+    <span>My data</span>
+  </button>
+  <button mat-menu-item [routerLink]="['/']">
+    <mat-icon>shopping_cart</mat-icon>
+    <span>Cart</span>
+  </button>
+  <button mat-menu-item [routerLink]="['/']">
+    <mat-icon>favorite</mat-icon>
+    <span>Favorite</span>
+  </button>
+  <button mat-menu-item [routerLink]="['/']">
+    <mat-icon>login</mat-icon>
+    <span>Login</span>
+  </button>
+
+  <!-- Caso estiver logado, mostrar esse botão
+  <button mat-menu-item [routerLink]="['/']">
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button> -->
+</mat-menu>
