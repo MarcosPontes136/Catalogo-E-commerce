@@ -1,0 +1,12 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" [routerLink]="['/']">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a class="navbar-brand" [routerLink]="['/']">LojaTeste</a>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" [matBadge]="cartCount()" [routerLink]="['/cart']">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+</mat-toolbar>
+
+
