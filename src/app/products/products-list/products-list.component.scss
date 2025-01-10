@@ -9,13 +9,6 @@ mat-card {
   margin: 15px;
 }
 
-.product-details {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .product-badge {
   color: #fff;
   text-align: center;
@@ -36,3 +29,24 @@ mat-card {
     white-space: nowrap;
   }
 }
+
+.product-details {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .strikethrough {
+    text-decoration: line-through;
+    color: #757575;
+    font-size: 0.9rem;
+  }
+
+  .discounted-price {
+    font-weight: bold;
+    color: #000000;
+    font-size: 1.2rem;
+  }
+}
+
+
