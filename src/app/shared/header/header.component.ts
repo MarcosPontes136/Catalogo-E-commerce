@@ -5,10 +5,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../services/cartService/cart.service';
 import {MatBadgeModule} from '@angular/material/badge';
+import { MenuVerticalComponent } from "../menu-vertical/menu-vertical.component";
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
-  imports: [MatToolbarModule, MatButtonModule, RouterLink, MatIconModule, MatBadgeModule],
+  imports: [MatToolbarModule, MatButtonModule, RouterLink, MatIconModule, MatBadgeModule, MenuVerticalComponent, MatMenuModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -16,4 +18,5 @@ export class HeaderComponent {
 
   private cartService = inject(CartService);
   cartCount = this.cartService.cartCount;
+
 }

@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,10 +7,11 @@ import { CartService } from '../../shared/services/cartService/cart.service';
 import { ProductsService } from '../../shared/services/productsService/products.service';
 import { Product } from '../../shared/interfeces/products';
 import { PaginatorComponent } from "../../shared/paginator/paginator.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
-  imports: [MatCardModule, MatButtonModule, MatIconModule, AsyncPipe, PaginatorComponent],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, PaginatorComponent],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
 })
@@ -27,6 +27,8 @@ export class ProductsListComponent implements OnInit {
   pageSize = 4;
   pageIndex = 0;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.service.load().subscribe((products) => {
       this.displayedProducts = products;
@@ -36,6 +38,10 @@ export class ProductsListComponent implements OnInit {
 
   addProductToCart(product: Product): void{
     this.cartService.addProducts(product);
+  }
+
+  navToDetail(productId: string): void {
+    this.router.navigate(['/details', productId]);
   }
 
   onPageChange(event: { pageSize: number; pageIndex: number }): void {

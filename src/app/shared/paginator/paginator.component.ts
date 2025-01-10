@@ -1,6 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
-import { JsonPipe } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -13,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     MatSlideToggleModule,
     MatPaginatorModule,
-    JsonPipe,
   ],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss'
