@@ -8,6 +8,7 @@ import { ProductsService } from '../../shared/services/productsService/products.
 import { Product } from '../../shared/interfeces/products';
 import { PaginatorComponent } from "../../shared/paginator/paginator.component";
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-products-list',
@@ -17,29 +18,41 @@ import { Router } from '@angular/router';
 })
 export class ProductsListComponent implements OnInit {
 
+  private destroy$ = new Subject<void>();
+
   private service = inject(ProductsService);
   private cartService = inject(CartService);
   products$ = this.service.load();
 
   displayedProducts: Product[] = [];
 
-  totalProduct = this.service.totalProduct;
-  pageSize = 4;
+  totalProduct = 0;
+  pageSize = 5;
   pageIndex = 0;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.service.load().subscribe((products) => {
-      this.displayedProducts = products;
-      this.updateDisplayedProducts(products);
-    });
+    this.service.load()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        {
+          next: (products: Product[]) => {
+            this.displayedProducts = products;
+            this.totalProduct = products.length;
+            this.updateDisplayedProducts(products);
+          },
+          error: (error) => {
+            //tratamento de erro futuramente (em desenvolvimento)
+          }
+        });
   }
 
   addProductToCart(product: Product): void{
     this.cartService.addProducts(product);
   }
 
+  //Aba de detalhes do produto por ID (em desenvolvimento)
   navToDetail(productId: string): void {
     this.router.navigate(['/details', productId]);
   }

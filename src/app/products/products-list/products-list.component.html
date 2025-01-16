@@ -6,12 +6,11 @@
             <span>Sale</span>
           </div>
         }
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img class="product-image" mat-card-image [src]="'data:image/png;base64,' + product.image" alt="description">
         <mat-card-content class="pa-1">
           <div class="product-details">
             <div>
               <p class="ma-0">{{ product.name }}</p>
-              <p class="ma-0 pa-0 text-md">{{ product.description }}</p>
             </div>
             <div class="mat-text-primary text-xl">
               @if (product.discounted === 'discounted') {
@@ -19,7 +18,7 @@
                 <span class="discounted-price"> $ {{ product.price }}</span>
               }
               @if (product.discounted !== 'discounted') {
-                <span > $ {{ product.price }}</span>
+                <span class="mat-text-muted text-sm"> $ {{ product.price }}</span>
               }
             </div>
             <button mat-icon-button color="accent" (click)="addProductToCart(product)">
