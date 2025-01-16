@@ -40,11 +40,15 @@ mat-card {
   }
 }
 
+.product-image {
+  margin-bottom: auto;
+}
+
 .product-details {
   display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+  flex-flow: column;
   align-items: center;
+  flex-direction: column;
 
   .strikethrough {
     text-decoration: line-through;
