@@ -1,6 +1,6 @@
 {
   "name": "catalogo-ecommerce",
-  "version": "0.0.0",
+  "version": "1.0.0-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:catalogoEcommerce": "node dist/catalogo-ecommerce/server/server.mjs"
+  },
+  "engines": {
+    "node": ">=20.0.0 <22.11.0"
   },
   "private": true,
   "dependencies": {
