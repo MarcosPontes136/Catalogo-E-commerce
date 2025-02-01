@@ -1,0 +1,34 @@
+.animationT {
+  font-size: larger;
+  font-family: fantasy;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+	-webkit-animation: animationT 1.2s cubic-bezier(0.680, -0.550, 0.265, 1.550) reverse both;
+	        animation: animationT 1.2s cubic-bezier(0.680, -0.550, 0.265, 1.550) reverse both;
+}
+
+@-webkit-keyframes animationT {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+}
+
+@keyframes animationT {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+

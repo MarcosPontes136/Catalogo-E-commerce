@@ -1,0 +1,94 @@
+<mat-card>
+  <mat-toolbar color="primary">Create Product</mat-toolbar>
+  <mat-card-content>
+    <form [formGroup]="form" class="min-width">
+      <div class="spaceLeft">
+        <mat-form-field class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" #name maxlength="100"/>
+          @if (form.get('name')?.hasError('required')) {
+            <mat-error>Campo Obrigatório</mat-error>
+          } @else if (form.get('name')?.hasError('minlength')) {
+            <mat-error>Mínimo 5 caracteres.</mat-error>
+          } @else if (form.get('name')?.hasError('maxlength')) {
+            <mat-error>Máximo 100 caracteres.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="full-width description">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="description" #description maxlength="200"/>
+          @if (form.get('description')?.hasError('required')) {
+            <mat-error>Campo Obrigatório</mat-error>
+          } @else if (form.get('description')?.hasError('minlength')) {
+            <mat-error>Mínimo 10 caracteres.</mat-error>
+          } @else if (form.get('description')?.hasError('maxlength')) {
+            <mat-error>Máximo 200 caracteres.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="column">
+          <mat-label>Price</mat-label>
+          <input matInput formControlName="price" placeholder="0" appCurrencyMask/>
+          @if (form.get('price')?.hasError('required')) {
+            <mat-error>Campo Obrigatório</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="spaceLeft">
+          <mat-form-field class="column">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="no">Default</mat-option>
+              <mat-option value="sale">Sale</mat-option>
+            </mat-select>
+            @if (form.get('status')?.hasError('required')) {
+              <mat-error>Campo Obrigatório</mat-error>
+            }
+          </mat-form-field>
+
+          @if (form.get('status')?.value == 'sale') {
+            <mat-form-field class="column">
+              <mat-label>Discounted</mat-label>
+              <mat-select formControlName="discounted">
+                <mat-option value="no">No</mat-option>
+                <mat-option value="discounted">Yes</mat-option>
+              </mat-select>
+              @if (form.get('discounted')?.hasError('required')) {
+                <mat-error>Campo Obrigatório</mat-error>
+              }
+            </mat-form-field>
+          }
+
+          @if (form.get('discounted')?.value !== 'no' && form.get('status')?.value == 'sale') {
+            <mat-form-field class="column">
+              <mat-label>Discount</mat-label>
+              <input matInput formControlName="discount" placeholder="0" appCurrencyMask/>
+              @if (form.get('discount')?.hasError('required')) {
+                <mat-error>Campo Obrigatório</mat-error>
+              }
+            </mat-form-field>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Select Image</label>
+          <input class="form-control" type="file" formControlName="image" id="formFile" (change)="onFileSelected($event)" >
+          @if (form.get('image')?.hasError('required')) {
+            <mat-error>Campo Obrigatório</mat-error>
+          }
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="actions-center">
+    <button mat-raised-button color="primary" (click)="submitForm()" type="submit" [disabled]="!form.valid">
+      Save
+    </button>
+    <button mat-raised-button (click)="onCancel()" class="btn-space" type="button" style="margin-left: 5px;">
+      Cancel
+    </button>
+  </mat-card-actions>
+</mat-card>

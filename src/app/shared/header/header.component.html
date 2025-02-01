@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <button mat-icon-button [matMenuTriggerFor]="menuComponente.menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a class="navbar-brand animationT" [routerLink]="['/']">LojaTeste</a>
+  <span class="example-spacer"></span>
+
+  <button mat-icon-button class="example-icon" [matBadge]="cartCount()" [routerLink]="['/cart']">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+
+  <button mat-icon-button class="example-icon" [routerLink]="['/']">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<app-menu-vertical #menuComponente></app-menu-vertical>
