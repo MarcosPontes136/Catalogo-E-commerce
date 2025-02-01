@@ -10,6 +10,7 @@
           "-webkit-font-feature-settings"
         ]
       }
-    ]
+    ],
+    "axe/forms": "off"
   }
 }

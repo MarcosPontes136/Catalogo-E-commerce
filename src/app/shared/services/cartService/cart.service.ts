@@ -9,9 +9,18 @@ export class CartService {
 
   cartItems = signal<CartItem[]>([]);
   cartCount = computed(() => this.cartItems().reduce((acc, curr) => acc + curr.quantity, 0));
-  cartSubTotal = computed(() => this.cartItems().reduce((acc, curr) => acc + (curr.quantity * curr.product.price), 0));
 
-  cartTax = computed(() => this.cartSubTotal() * 0.08);
+  cartSubTotal = computed(() =>
+    this.cartItems().reduce((acc, curr) => {
+      let price = curr.product.price / 100;
+      if (curr.product.discount) {
+        price = curr.product.discount / 100;
+      }
+      return acc + (curr.quantity * price);
+    },0)
+  );
+
+  cartTax = computed(() => this.cartSubTotal() * 0.02);
   cartTotal = computed(() => this.cartSubTotal() + this.cartTax());
 
   e = effect(() => console.log('cartCount updated', this.cartCount()));

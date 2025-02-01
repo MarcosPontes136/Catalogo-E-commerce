@@ -14,15 +14,21 @@
             </div>
             <div class="mat-text-primary text-xl">
               @if (product.discounted === 'discounted') {
-                <span class="strikethrough mat-text-muted text-sm ">$ {{ product.discount }}</span>
-                <span class="discounted-price"> $ {{ product.price }}</span>
+                <span class="strikethrough mat-text-muted text-sm ">{{ product.price / 100 | currency: 'USD': 'symbol': '1.2-2' }}</span>
+                <span class="discounted-price"> {{ product.discount / 100 | currency: 'USD': 'symbol': '1.2-2' }}</span>
               }
               @if (product.discounted !== 'discounted') {
-                <span class="mat-text-muted text-sm"> $ {{ product.price }}</span>
+                <span class="mat-text-muted text-sm"> {{ product.price / 100 | currency: 'USD': 'symbol': '1.2-2' }}</span>
               }
             </div>
-            <button mat-icon-button color="accent" (click)="addProductToCart(product)">
+            <button mat-icon-button color="accent" (click)="addProductToCart(product); $event.stopPropagation()">
               <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+            <button mat-icon-button class="buttonFavorite" (click)="validModal(product.id); $event.stopPropagation()">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button class="buttonFavorite" (click)="toggleFavorite($event); $event.stopPropagation()">
+              <mat-icon>favorite</mat-icon>
             </button>
           </div>
         </mat-card-content>

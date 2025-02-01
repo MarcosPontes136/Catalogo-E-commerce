@@ -20,7 +20,7 @@ export class PaginatorComponent {
     @Input() length = 0;
     pageSize = 0;
     pageIndex = 0;
-    pageSizeOptions = [5, 10, 15];
+    pageSizeOptions = [6, 12, 20, 50];
 
     @Output() pageChange = new EventEmitter<{ pageSize: number; pageIndex: number }>();
 
