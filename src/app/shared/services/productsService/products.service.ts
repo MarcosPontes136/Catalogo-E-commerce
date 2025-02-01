@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Product } from '../../interfeces/products';
+import { ApiResponse, Product } from '../../interfeces/products';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
@@ -13,18 +13,20 @@ export class ProductsService {
 
   private readonly apiUrl = environment.apiUrl;
   private readonly getProducts = `/products`;
-  private readonly isLocal = true;
+  private readonly postProducts = `/product`;
+  private readonly deleteProducts = `/product/id`;
   private http = inject(HttpClient);
 
-  load(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}`+`${this.getProducts}`)
+  load(): Observable<ApiResponse<Product[]>> {
+    return this.http.get<ApiResponse<Product[]>>(`${this.apiUrl}`+`${this.getProducts}`);
   }
 
-  create(product:Product): Observable<Product> {
-    if (this.isLocal) {
-      this.products.push(product);
-      return of(product);
-    }
-    return this.http.post<Product>(this.getProducts, product,);
+  create(product: Product): Observable<Product> {
+    this.products.push(product);
+    return this.http.post<Product>(`${this.apiUrl}` + `${this.postProducts}`, product);
+  }
+
+  delete(productId: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}${this.deleteProducts}/${productId}`);
   }
 }

@@ -8,3 +8,9 @@ export interface Product {
   description: string;
   image: string;
 }
+
+export interface ApiResponse<T> {
+  message: string;
+  data: T;
+  success: boolean;
+}

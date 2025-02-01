@@ -1,12 +1,9 @@
 <div class="parent">
   <div class="product-details">
-    <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" height="100px"
+    <img [src]="'data:image/png;base64,' + cartItem.product.image" height="100px"
       alt="{{ cartItem.product.name }}" />
     <div>
       <p class="ma-0">{{ cartItem.product.name }}</p>
-      <p class="ma-0 pa-0 text-md" style="padding-top: 5px">
-        {{ cartItem.product.description }}
-      </p>
     </div>
   </div>
   <div>
@@ -21,12 +18,18 @@
   </div>
   <div>
     <div>
-      <p class="ma-0" style="font-weight: bold">
-        {{ cartItem.product.price * cartItem.quantity | currency : "USD" }}
-      </p>
-      <p class="ma-0 pa-0 text-md" style="padding-top: 5px">
-        {{ cartItem.product.price | currency : "USD" }} each
-      </p>
+      @if (!cartItem.product.discount) {
+        <p class="ma-0" style="font-weight: bold">
+          {{ cartItem.product.price * cartItem.quantity / 100 | currency: 'USD': 'symbol': '1.2-2' }} each
+        </p>
+      } @else {
+        <p class="ma-0" style="font-weight: bold">
+          {{ cartItem.product.discount * cartItem.quantity / 100 | currency: 'USD': 'symbol': '1.2-2' }}
+        </p>
+        <p class="ma-0 pa-0 text-md" style="padding-top: 5px">
+          {{ cartItem.product.price / 100 | currency: 'USD': 'symbol': '1.2-2' }} each
+        </p>
+      }
     </div>
   </div>
   <div>
